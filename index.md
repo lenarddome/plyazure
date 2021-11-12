@@ -21,13 +21,21 @@ Our instance is called **[vm-bric-spot-comp-modelling]**.
 
 Install Azure CLI for Linux according to your preferred method. There is official documentation on how to do it [here](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt).
 
-After you set it up, you need to log in to your account:
+After you set it up, you need to log in to your account with
 
 ```bash
 az login
 ```
 
-This command will open a browser window, where you will need to log in with your University details. Next, start the VM.
+This command will open a browser window, where you will need to log in with your University details. In the future, when there will be multiple and different type of instances, you can list them with
+
+```bash
+az vm list
+```
+
+before selecting which one to start for the job.
+
+To start the VM, use
 
 ```bash
 az vm start --resource-group rg-bric-computational-modelling --name vm-bric-spot-comp-modelling
@@ -59,9 +67,9 @@ If you want to copy the whole folder, use `scp * Res…`
 
 ## Running Your Script
 
-There are multiple ways to run your code. You can use screen and other solutions, but a bash script is the best, because you can actually shut down the instance when finished - even when the simulations are halted due to an error. You don't want to keep paying for an idle instance.
+There are multiple ways to run your code - e.g. use screen, but a bash script is the best. It allows you to simply shut down the instance when finished - even when the simulations are halted due to an error. You don't want to keep paying for an idle instance.
 
-The bash script will be a file ending in `.sh` and beginning with `#!/bin/sh` on the first line. See the example below:
+The bash script will be a file ending in `.sh` and beginning with `#!/bin/sh`. See the example below:
 
 ```bash
 #!/bin/sh
@@ -81,7 +89,7 @@ date
 Rscript my-unashamedly-parallelized.R | tee -a "log.$(date +"%m-%d-%y").out"
 
 # or if you use a python script that is not executable as a program
-python my-anasamedly-gpu-dependent.py | tee -a "log.$(date +"%m-%d-%y").out"
+python my-anashamedly-gpu-dependent.py | tee -a "log.$(date +"%m-%d-%y").out"
 
 echo "End of job at"
 date
@@ -95,7 +103,7 @@ Note that I would recommend testing a dumbed-down version of your code and make 
 
 ## Executing your script on the Virtual Machine
 
-After having your bash script, run the following command:
+After writing, testing and uploading your bash script, run the following command:
 
 ```bash
 # make it executable
@@ -108,9 +116,9 @@ I would generally recommend to use `screen`, so that you can return to your work
 
 ## Writing files to disk
 
-There is a shared `/DATA` folder that can be mounted on both the instance and your local machine.
+There is a shared `/DATA` folder that can be mounted on the instance and your local machine.
 
-Paul is yet to explain the details to me.
+This is a work in progress.
 
 ## Checking jobs
 
