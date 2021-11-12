@@ -27,7 +27,7 @@ After you set it up, you need to log in to your account with
 az login
 ```
 
-This command will open a browser window, where you will need to log in with your University details. In the future, when there will be multiple and different type of instances, you can list them with
+This command will open a browser window, where you will need to log in with your University email and password. In the future, there will be multiple and different type of instances - e.g. one with high number of CPU that is optimized for computing and one with a high-end GPU for Deep Convolutional Networks. You can list all VMs that are accessible to you with
 
 ```bash
 az vm list
