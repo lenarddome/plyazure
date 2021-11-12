@@ -38,13 +38,13 @@ before selecting which one to start for the job.
 To start the VM, use
 
 ```bash
-az vm start --resource-group rg-bric-computational-modelling --name vm-bric-spot-comp-modelling
+az vm start -g rg-bric-computational-modelling -n vm-bric-spot-comp-modelling
 ```
 
 To shut down the VM, you will need to use `az vm deallocate`. Simply using `az vm stop` will stop the VM, but a stopped VM will still incur charges.
 
 ```bash
-az vm deallocate --resource-group rg-bric-computational-modelling --name vm-bric-spot-comp-modelling
+az vm deallocate -g rg-bric-computational-modelling -n vm-bric-spot-comp-modelling
 ```
 
 ## Logging in
