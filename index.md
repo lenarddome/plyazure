@@ -1,5 +1,7 @@
 # Manual on Using Microsoft Azure
 
+**Developmental Version**
+
 Azure is a cloud computing solution that provides a range of services including virtual machines, servers for data processing, computing clusters for batch jobs.
 
 The University is pushing for Azure, so cloud computing services will be part of the same infrastructure.
@@ -17,6 +19,26 @@ Our instance is called **[vm-bric-spot-comp-modelling]**.
 
 ## Using Azure CLI to manage your VM
 
+Install Azure CLI for Linux according to your preferred method. There is official documentation on how to do it [here](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt).
+
+After you set it up, you need to log in to your account:
+
+```bash
+az login
+```
+
+This command will open a browser window, where you will need to log in with your University details. Next, start the VM.
+
+```bash
+az vm start --resource-group rg-bric-computational-modelling --name vm-bric-spot-comp-modelling
+```
+
+To shut down the VM, you will need to use `az vm deallocate`. Simply using `az vm stop` will stop the VM, but a stopped VM will still incur charges.
+
+```bash
+az vm deallocate --resource-group rg-bric-computational-modelling --name vm-bric-spot-comp-modelling
+```
+
 ## Logging in
 
 There are various solutions, like PuTTy, xRDP (seems the best for regular psychologists), ssh. I am using simple ssh.
@@ -25,11 +47,15 @@ There are various solutions, like PuTTy, xRDP (seems the best for regular psycho
 ssh Researcher@10.115.20.7
 ```
 
+Enter your password when prompted.
+
 You can copy files to the instances by using scp.
 
 ```bash
 scp my-files-to-copy Researcher@10.115.20.7:/home/Documents/my-project/
 ```
+
+If you want to copy the whole folder, use `scp * Res…`
 
 ## Running Your Script
 
@@ -92,7 +118,7 @@ If you want to see how your script is running, you could use `htop` to check on 
 
 ## How to load packages in your script
 
-In most scenarios, use as few packages as possible. I would also recommend not to load metapackages like `tidyverse`. In case you want to safeguard against missing packages, here are some scripts below to install missing packages before the rest of your code is run.
+In most scenarios, use as few packages as possible. I would also recommend to not load metapackages like `tidyverse`. In case you want to safeguard against missing packages, here are some scripts below to install missing packages before the rest of your code is run.
 
 ```r
 ## If a package is installed, it will be loaded. If any
