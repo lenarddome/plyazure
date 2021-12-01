@@ -69,7 +69,7 @@ official documentation on how to do it
 
 After installing it, you need to log in to your account with
 
-``` {.sourceCode .bash}
+```bash
 az login
 ```
 
@@ -80,7 +80,7 @@ CPU that is optimized for computing and one with a high-end GPU for Deep
 Convolutional Networks. You can list all VMs that are accessible to you
 with
 
-``` {.sourceCode .bash}
+```bash
 az vm list
 ```
 
@@ -88,7 +88,7 @@ before selecting which one to start for the job.
 
 To start the VM, use
 
-``` {.sourceCode .bash}
+```bash
 az vm start -g resource-group -n vm-name
 ```
 
@@ -96,7 +96,7 @@ To shut down the VM, you will need to use `az vm deallocate`. Simply
 using `az vm stop` will stop the VM, but a stopped VM will still incur
 charges.
 
-``` {.sourceCode .bash}
+```bash
 az vm deallocate -g resource-group -n vm-name
 ```
 
@@ -106,7 +106,7 @@ Logging in
 There are various solutions, like PuTTy, xRDP (seems the best for
 regular psychologists), ssh. I am using simple ssh.
 
-``` {.sourceCode .bash}
+```bash
 ssh username@host
 ```
 
@@ -114,7 +114,7 @@ Enter your password when prompted.
 
 You can copy files to the instances by using scp.
 
-``` {.sourceCode .bash}
+```bash
 # copy file
 scp my-files-to-copy username@host:/home/path/to/my-project/
 # copy all things in current directory
@@ -140,7 +140,7 @@ The root directories on the VM will not be writeable by either you or R.
 The `.libPaths` command will enable you to set new target directories
 for the packages you are about to install.
 
-``` {.sourceCode .r}
+``r
 .libPaths("home/your/new/path")
 ```
 
@@ -160,7 +160,7 @@ In case you want to safeguard against missing packages, here are some
 scripts below to install missing packages before the rest of your code
 is run.
 
-``` {.sourceCode .r}
+``r
 ## If a package is installed, it will be loaded. If any
 ## are not, the missing package(s) will be installed
 ## from CRAN and then loaded.
@@ -185,7 +185,7 @@ package.check <- lapply(
 I didn't test the python version on the VM, but this seems to be at
 least a locally working solution:
 
-``` {.sourceCode .python}
+```python
 try:
     import scipy
 except ImportError:
@@ -217,7 +217,7 @@ don't want to keep paying for an idle instance.
 The bash script will be a file ending in `.sh` and beginning with
 `#!/bin/sh`. See the example below:
 
-``` {.sourceCode .bash}
+```bash
 #!/bin/sh
 
 # allow errors so the bash script keeps running even
@@ -235,7 +235,7 @@ date
 Rscript my-unashamedly-parallelized-simulation.R | tee -a "log.$(date +"%m-%d-%y").out"
 
 # or if you use a python script that is not executable as a program
-python my-embarrassingly-cpu-heavy-job.py | tee -a "log.$(date +"%m-%d-%y").out"
+python3 my-embarrassingly-cpu-heavy-job.py | tee -a "log.$(date +"%m-%d-%y").out"
 
 echo "End of job at"
 date
@@ -255,7 +255,7 @@ Executing your script on the Virtual Machine
 After writing, testing and uploading your bash script, run the following
 command:
 
-``` {.sourceCode .bash}
+```bash
 # make it executable
 chmod u+x my-bash-script.sh
 # run command in background with logging
